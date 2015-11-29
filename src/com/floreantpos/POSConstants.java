@@ -444,4 +444,8 @@ public class POSConstants {
 	public static final String RECEIPT_REPORT_PAIDAMOUNT_LABEL = Messages.getString("RECEIPT_REPORT_PAIDAMOUNT_LABEL"); //$NON-NLS-1$
 	public static final String RECEIPT_REPORT_DUEAMOUNT_LABEL = Messages.getString("RECEIPT_REPORT_DUEAMOUNT_LABEL"); //$NON-NLS-1$
 	public static final String RECEIPT_REPORT_CHANGEAMOUNT_LABEL = Messages.getString("RECEIPT_REPORT_CHANGEAMOUNT_LABEL"); //$NON-NLS-1$
+	public static final String EMPLOYEE = Messages.getString("PosMessage.320"); //$NON-NLS-1$
+	public static final String CREDIT = Messages.getString("PosMessage.321"); //$NON-NLS-1$
+	public static final String STATUS = Messages.getString("PosMessage.322"); //$NON-NLS-1$
+	public static final String DEPARTMENT = Messages.getString("PosMessage.323"); //$NON-NLS-1$
 }

@@ -6,7 +6,7 @@ public enum PaymentType {
 	CASH("CASH"), DEBIT_VISA("Visa", "visa_card.png"), DEBIT_MASTER_CARD("MasterCard", "master_card.png"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ 
 	CREDIT_VISA("Visa", "visa_card.png"), CREDIT_MASTER_CARD("MasterCard", "master_card.png"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	CREDIT_AMEX("Amex", "am_ex_card.png"), CREDIT_DISCOVERY("Discover", "discover_card.png"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-	GIFT_CERTIFICATE("GIFT CERTIFICATE"); //$NON-NLS-1$
+	GIFT_CERTIFICATE("GIFT CERTIFICATE"), EMPLOYEE("EMPLEADO","employee.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	private String displayString;
 	private String imageFile;
@@ -44,6 +44,7 @@ public enum PaymentType {
 	public boolean isSupported() {
 		switch (this) {
 		case CASH:
+		case EMPLOYEE:	
 			return true;
 
 		default:
@@ -70,6 +71,10 @@ public enum PaymentType {
 				
 			case GIFT_CERTIFICATE:
 				transaction = new GiftCertificateTransaction();
+				break;
+				
+			case EMPLOYEE:	
+				transaction = new EmployeeTransaction();
 				break;
 				
 			default:

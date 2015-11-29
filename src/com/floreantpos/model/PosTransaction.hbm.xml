@@ -67,10 +67,18 @@
 
 		<many-to-one class="com.floreantpos.model.PayoutRecepient" lazy="false" name="recepient">
 			<column name="PAYOUT_RECEPIENT_ID" />
+		</many-to-one>		
+
+		<many-to-one class="com.floreantpos.model.Employee" name="employee">
+			<column name="ID_EMPLOYEE" />
 		</many-to-one>
 
 		<subclass discriminator-value="CASH" name="com.floreantpos.model.CashTransaction">
 		</subclass>
+		
+		<subclass discriminator-value="EMPLOYEE" name="com.floreantpos.model.EmployeeTransaction">
+		</subclass>
+		
 
 		<subclass discriminator-value="GIFT_CERT" name="com.floreantpos.model.GiftCertificateTransaction">
 		</subclass>

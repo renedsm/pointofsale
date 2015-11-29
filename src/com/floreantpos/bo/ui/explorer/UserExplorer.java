@@ -165,6 +165,7 @@ public class UserExplorer extends TransparentPanel {
 			
 			switch(columnIndex) {
 				case 0:
+					
 					return String.valueOf(user.getUserId());
 					
 				case 1:

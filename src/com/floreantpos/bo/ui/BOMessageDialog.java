@@ -26,6 +26,10 @@ public class BOMessageDialog {
 		JOptionPane.showMessageDialog(com.floreantpos.util.POSUtil.getFocusedWindow(), errorMessage, Messages.getString("BOMessageDialog.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 	}
 
+	
+	public static void showMessage(String infoMessage) {
+		JOptionPane.showMessageDialog(com.floreantpos.util.POSUtil.getFocusedWindow(), infoMessage, Messages.getString("BOMessageDialog.0"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+	}
 	public static void showError(String errorMessage, Throwable t) {
 		logger.error(errorMessage, t);
 		JOptionPane.showMessageDialog(com.floreantpos.util.POSUtil.getFocusedWindow(), errorMessage, Messages.getString("BOMessageDialog.1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$

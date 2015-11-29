@@ -44,6 +44,7 @@ public abstract class BasePosTransaction  implements Comparable, Serializable {
 	public static String PROP_CARD_TRANSACTION_ID = "cardTransactionId"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_GIFT_CERT_PAID_AMOUNT = "giftCertPaidAmount"; //$NON-NLS-1$
+	public static String PROP_EMPLOYEE = "employee"; //$NON-NLS-1$
 
 
 	// constructors
@@ -113,6 +114,7 @@ public abstract class BasePosTransaction  implements Comparable, Serializable {
 	private com.floreantpos.model.User user;
 	private com.floreantpos.model.PayoutReason reason;
 	private com.floreantpos.model.PayoutRecepient recepient;
+	private com.floreantpos.model.Employee employee;
 
 	// collections
 	private java.util.Map<String, String> properties;
@@ -635,6 +637,14 @@ public abstract class BasePosTransaction  implements Comparable, Serializable {
 
 
 
+
+	public com.floreantpos.model.Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(com.floreantpos.model.Employee employee) {
+		this.employee = employee;
+	}
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;

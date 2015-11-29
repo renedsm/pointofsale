@@ -32,6 +32,7 @@ import com.floreantpos.model.CardReader;
 import com.floreantpos.model.CashTransaction;
 import com.floreantpos.model.CouponAndDiscount;
 import com.floreantpos.model.CreditCardTransaction;
+import com.floreantpos.model.EmployeeTransaction;
 import com.floreantpos.model.GiftCertificateTransaction;
 import com.floreantpos.model.Gratuity;
 import com.floreantpos.model.OrderType;
@@ -295,6 +296,29 @@ public class SettleTicketDialog extends POSDialog implements CardInputListener {
 
 					settleTicket(transaction);
 					break;
+				case EMPLOYEE:
+					
+					EmployeePayDialog employeeDialog = new EmployeePayDialog(this);
+					employeeDialog.setAmountTicket(tenderAmount);
+					employeeDialog.pack();
+					employeeDialog.open();
+					
+					if (employeeDialog.isCanceled())
+						return;
+
+					transaction = new EmployeeTransaction();
+					transaction.setEmployee(employeeDialog.getEmployee());
+					transaction.setPaymentType(PaymentType.EMPLOYEE.name());
+					transaction.setTicket(ticket);
+					transaction.setCaptured(true);
+					setTransactionAmounts(transaction);
+
+					settleTicket(transaction);
+					break;
+					
+	
+		
+					
 
 				default:
 					break;

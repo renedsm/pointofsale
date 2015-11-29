@@ -49,7 +49,7 @@ public class HeaderPanel extends JPanel {
 		setOpaque(true);
 		setBackground(Color.white);
 
-		JLabel logoLabel = new JLabel(IconFactory.getIcon("/ui_icons/", "header-logo.png")); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel logoLabel = new JLabel(IconFactory.getIcon("/ui_icons/", "Six_Flags_logo_small.png")); //$NON-NLS-1$ //$NON-NLS-2$
 		add(logoLabel);
 		
 		TransparentPanel statusPanel = new TransparentPanel(new MigLayout("hidemode 3, fill, ins 0, gap 0")); //$NON-NLS-1$

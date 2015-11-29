@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.floreantpos.model">
+  <class lazy="false" name="com.floreantpos.model.Employee" table="EMPLOYEE">
+    <id column="ID_EMPLOYEE" name="idEmployee" type="string"/>    
+    <property column="NAME" name="name" not-null="true" type="java.lang.String" unique="true"/>
+    <property column="DEPARTMENT" length="255" name="department"  type="java.lang.String"/>
+    <property column="MAX_CREDIT" name="maxCredit" type="java.lang.Double"/>
+    <property column="PICTURE" name="picture"  not-null="false" type="binary" />
+    <property column="LAST_VISIT" length="30" name="lastVisit" type="java.lang.String"/>
+    <property column="STATUS" length="30" name="status" type="java.lang.String"/>
+  
+  </class>
+</hibernate-mapping>

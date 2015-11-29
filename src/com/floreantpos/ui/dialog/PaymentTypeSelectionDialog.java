@@ -30,6 +30,7 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 	PaymentType selectedPaymentType;
 	private PaymentSelectionButton btnCash;
 	private PaymentSelectionButton btnGiftCert;
+	private PaymentSelectionButton btnEmployee;
 
 	/** Creates new form PaymentTypeSelectionDialog */
 	public PaymentTypeSelectionDialog() {
@@ -50,10 +51,16 @@ public class PaymentTypeSelectionDialog extends POSDialog {
 		content.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		JPanel genericPanel = new JPanel(new GridLayout(1, 0, 15, 15));
+		
 		btnCash = new PaymentSelectionButton(PaymentType.CASH);
 		genericPanel.add(btnCash, "grow,wrap"); //$NON-NLS-1$
+		
 		btnGiftCert = new PaymentSelectionButton(PaymentType.GIFT_CERTIFICATE);
 		genericPanel.add(btnGiftCert);
+		
+		btnEmployee = new PaymentSelectionButton(PaymentType.EMPLOYEE);
+		genericPanel.add(btnEmployee);
+		
 		content.add(genericPanel, "height 60px, wrap, growx"); //$NON-NLS-1$
 		
 		JPanel creditCardPanel = new JPanel(new GridLayout(1, 0, 10, 10));
