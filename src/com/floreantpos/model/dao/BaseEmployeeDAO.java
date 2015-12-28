@@ -2,8 +2,10 @@ package com.floreantpos.model.dao;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
@@ -48,12 +50,15 @@ public class BaseEmployeeDAO extends _RootDAO {
 		return (com.floreantpos.model.Employee) get(getReferenceClass(), key);
 	}
 	
+	public List<Object[]> getVentaPorEmpleado(String cadena){
+		Session session = getSession();
+		 List<Object[]> lista = new ArrayList<Object[]>();
+		 lista = session.createSQLQuery(cadena).list();
+		 return lista;
+	}
+	
 	public double getVentaMes(String idEmployee, Date today){
 		Session session = getSession();
-		
-		
-		
-
         Calendar calendar = Calendar.getInstance();  
         calendar.setTime(today);  
         calendar.set(Calendar.DAY_OF_MONTH, 1);  

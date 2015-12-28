@@ -448,4 +448,8 @@ public class POSConstants {
 	public static final String CREDIT = Messages.getString("PosMessage.321"); //$NON-NLS-1$
 	public static final String STATUS = Messages.getString("PosMessage.322"); //$NON-NLS-1$
 	public static final String DEPARTMENT = Messages.getString("PosMessage.323"); //$NON-NLS-1$
+	public static final String OPEN_FILE = Messages.getString("PosMessage.324"); //$NON-NLS-1$
+	public static final String SALES_EMPLOYEE = Messages.getString("PosMessage.325"); //$NON-NLS-1$
+	
+	
 }

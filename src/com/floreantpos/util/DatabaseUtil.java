@@ -108,9 +108,9 @@ public class DatabaseUtil {
 
 			Restaurant restaurant = new Restaurant();
 			restaurant.setId(Integer.valueOf(1));
-			restaurant.setName("Sample Restaurant");
-			restaurant.setAddressLine1("Somewhere");
-			restaurant.setTelephone("+0123456789");
+			restaurant.setName("Six Flags ");
+			restaurant.setAddressLine1("Picacho Ajusco");
+			restaurant.setTelephone("+5557835099");
 			RestaurantDAO.getInstance().saveOrUpdate(restaurant);
 
 			Tax tax = new Tax();

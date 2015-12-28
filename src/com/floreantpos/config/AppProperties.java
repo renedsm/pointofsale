@@ -8,14 +8,19 @@ public class AppProperties {
 	
 	static {
 		try {
+			
 			properties = new PropertiesConfiguration(AppProperties.class.getResource("/app.properties")); //$NON-NLS-1$
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public static String getVersion() {
-		return properties.getString("floreantpos.version"); //$NON-NLS-1$
+		
+			return properties.getString("floreantpos.version");
+		
+	
 		
 	}
 }

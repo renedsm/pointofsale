@@ -70,27 +70,38 @@ public class EmployeePayDialog extends POSDialog {
     					POSMessageDialog.showMessage(Messages.getString("EmployeePayDialog.5")); //$NON-NLS-1$
     					return;
     				}else{
+    					tfNameEmployee.setText("");
+    					tfCredit.setText("");
+    					tfSale.setText("");
+    					tfBalance.setText("");
+    					lPhoto.setIcon(null);
     					EmployeeDAO employeeDAO = new EmployeeDAO();
     				    employee = employeeDAO.get(tfIdEmployee.getText());
     					if (employee!=null){
+    						
+    						if (employee.getStatus().equalsIgnoreCase("ACTIVO")){
     						tfNameEmployee.setText(employee.getName());
     						
     						double monthSales = employeeDAO.getVentaMes(employee.getIdEmployee(), new Date());
-    						System.out.println("monthSales: "+monthSales);
-    						System.out.println("amountTicket: "+amountTicket);
+    						if (employee.getMaxCredit()==0){
+    							tfCredit.setText("ILIMITADO");
+    							tfBalance.setText("ILIMITADO");
+    						}else{
+    							tfCredit.setText(String.valueOf(employee.getMaxCredit()-monthSales));
+    							tfBalance.setText(String.valueOf(employee.getMaxCredit()-monthSales));
+    						}
     						
-    			
     						
     						
-    						tfCredit.setText(String.valueOf(employee.getMaxCredit()-monthSales));
     						tfSale.setText(String.valueOf(amountTicket));
     						monthSales+=amountTicket;
-    						tfBalance.setText(String.valueOf(employee.getMaxCredit()-monthSales));
+    						
     				
-    						if (monthSales>employee.getMaxCredit()){
+    						if (employee.getMaxCredit()>0 && monthSales>employee.getMaxCredit()){
     							POSMessageDialog.showMessage(Messages.getString("EmployeePayDialog.7"));
     							proceedSale = false;
     						}else{
+    							
     							proceedSale = true;
     						}
     						
@@ -104,6 +115,10 @@ public class EmployeePayDialog extends POSDialog {
     						        //add(lPhoto);
     						}
     						
+    						}else{
+        						POSMessageDialog.showMessage(Messages.getString("EmployeePayDialog.12"));
+        						proceedSale = false;
+        					}
     					}else{
     						POSMessageDialog.showMessage(Messages.getString("EmployeePayDialog.6"));
     						proceedSale = false;
@@ -208,6 +223,24 @@ public class EmployeePayDialog extends POSDialog {
 		});
 		psbtnCancel.setText(Messages.getString("GiftCertDialog.18")); //$NON-NLS-1$
 		buttonPanel.add(psbtnCancel, "w 100!, h 60!"); //$NON-NLS-1$
+		
+		
+		psbtnOk.setText(Messages.getString("GiftCertDialog.16")); //$NON-NLS-1$
+		buttonPanel.add(psbtnOk, "w 100!, h 60!"); //$NON-NLS-1$
+		
+		PosButton psbtnClear = new PosButton();
+		psbtnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfIdEmployee.setText("");
+				tfNameEmployee.setText("");
+				tfCredit.setText("");
+				tfSale.setText("");
+				tfBalance.setText("");
+				lPhoto.setIcon(null);
+			}
+		});
+		psbtnClear.setText(Messages.getString("EmployeePayDialog.13")); //$NON-NLS-1$
+		buttonPanel.add(psbtnClear, "w 100!, h 60!"); //$NON-NLS-1$
 		
 	}
 

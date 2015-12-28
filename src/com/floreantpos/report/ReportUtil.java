@@ -38,15 +38,17 @@ public class ReportUtil {
 		InputStream resource = null;
 
 		try {
+			System.out.println("USER_REPORT_DIR "+ USER_REPORT_DIR+ reportName  );
 			resource = ReceiptPrintService.class.getResourceAsStream(USER_REPORT_DIR + reportName + ".jasper"); //$NON-NLS-1$
 			if (resource == null) {
+				System.out.println("is resoucree null");
 				return compileReport(reportName);
 			}
 			else {
 				return (JasperReport) JRLoader.loadObject(resource);
 			}
 		} catch (Exception e) {
-			logger.error(Messages.getString("ReportUtil.8") + reportName + " from user directory, loading default report"); //$NON-NLS-1$ //$NON-NLS-2$
+			logger.error(Messages.getString("ReportUtil.8") + reportName + " from user directory, loading default report..."+e); //$NON-NLS-1$ //$NON-NLS-2$
 			return getDefaultReport(reportName);
 			
 		} finally {
@@ -65,6 +67,8 @@ public class ReportUtil {
 			File jrxmlFile = new File(ReceiptPrintService.class.getResource(USER_REPORT_DIR + reportName + ".jrxml").getFile()); //$NON-NLS-1$
 			File dir = jrxmlFile.getParentFile();
 			jasperFile = new File(dir, reportName + ".jasper"); //$NON-NLS-1$
+			
+System.out.println("dir: "+dir.getAbsolutePath());
 
 			in = ReceiptPrintService.class.getResourceAsStream(USER_REPORT_DIR + reportName + ".jrxml"); //$NON-NLS-1$
 			out = new FileOutputStream(jasperFile);

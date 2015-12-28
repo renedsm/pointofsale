@@ -72,7 +72,7 @@ public class ReceiptPrintService {
 	private static final String CURRENCY_SYMBOL = "currencySymbol"; //$NON-NLS-1$
 	private static Log logger = LogFactory.getLog(ReceiptPrintService.class);
 
-	private static final SimpleDateFormat reportDateFormat = new SimpleDateFormat("M/d/yy, h:m a"); //$NON-NLS-1$
+	private static final SimpleDateFormat reportDateFormat = new SimpleDateFormat("dd/MM/yyyy, HH:mm:ss "); //$NON-NLS-1$
 
 	public static void printGenericReport(String title, String data) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>(2);

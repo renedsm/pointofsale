@@ -6,11 +6,15 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -84,26 +88,53 @@ public class EmployeeExplorer extends TransparentPanel {
 
 		});
 
-		JButton importButton = new JButton(com.floreantpos.POSConstants.ADD);
+		JButton importButton = new JButton(com.floreantpos.POSConstants.OPEN_FILE);
 		importButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
+					
+					String fullFileName = "C:\\home\\pos\\logs\\";
+		            String op = System.getProperty("os.name");
+		            if (op.indexOf("nix") >= 0 || op.indexOf("nux") >= 0) {
+		                fullFileName = "/Users/rene/Desktop/Projects/pv/logs/";
+		            } else {
+		                if (op.indexOf("Mac") >= 0) {
+		                    fullFileName = "/Users/rene/Desktop/Projects/pv/logs/";
+
+		                } else {
+		                    fullFileName = "C:\\home\\pos\\logs\\";
+		                }
+		            }
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+					String fileNameLog = fullFileName +sdf.format(new Date());
 
 					File DataFile = new File(txtFile.getText());
 
 					CSVFile f = new CSVFile();
 					ArrayList<String[]> listCSV = f.ReadCSVfile(DataFile);
+					
+					FileWriter fstream =  new FileWriter(fileNameLog);       
+		            BufferedWriter out = new BufferedWriter(fstream);
+		            boolean hasErrors = false;
 					for (String[] row : listCSV) {
+						Employee employee = new Employee();
+						try{
 
 						if (row[0].equalsIgnoreCase("ALTA") || row[0].equalsIgnoreCase("EDICION")
-								|| row[0].equalsIgnoreCase("CANCELACION")) {
-							Employee employee = new Employee();
+								|| row[0].equalsIgnoreCase("CANCELACION") || row[0].equalsIgnoreCase("ELIMINACION")) {
+							
+							
 							employee.setIdEmployee(row[1]);
 							employee.setName(row[2]);
 							employee.setMaxCredit(Double.parseDouble(row[3]));
+							
 							if (row.length > 3)
 								employee.setDepartment(row[4]);
+							
 							if (row[0].equalsIgnoreCase("ALTA") || row[0].equalsIgnoreCase("EDICION")) {
+								
 								employee.setStatus("ACTIVO");
 								// load picture
 								if (row.length > 4 && row[5] != null && !row[5].equals("")) {
@@ -130,10 +161,22 @@ public class EmployeeExplorer extends TransparentPanel {
 							}
 
 							EmployeeDAO.instance.saveOrUpdate(employee);
+						    out.write(employee.getIdEmployee()+" "+employee.getName()+" OK");
+	                        out.newLine();
+						}
+						}catch (Exception ex){
+							 out.write(row[1]+" "+row[2]+" ERROR:"+ex);
+		                     out.newLine();
+		                     hasErrors = true;
 						}
 					}
-
-					BOMessageDialog.showMessage("Archivo cargado");
+					out.close();
+					
+					if (!hasErrors){
+						BOMessageDialog.showMessage("Archivo cargado");
+					}else{
+						BOMessageDialog.showMessage("Archivo cargado con errores, verifique el log: "+fileNameLog);
+					}
 
 				} catch (Exception x) {
 					x.printStackTrace();
@@ -156,7 +199,7 @@ public class EmployeeExplorer extends TransparentPanel {
 
 		EmployeeTableModel(List list) {
 			super(new String[] { com.floreantpos.POSConstants.ID, com.floreantpos.POSConstants.NAME,
-					com.floreantpos.POSConstants.CREDIT, com.floreantpos.POSConstants.DEPARTMENT }, list);
+					com.floreantpos.POSConstants.CREDIT, com.floreantpos.POSConstants.DEPARTMENT,com.floreantpos.POSConstants.STATUS }, list);
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
@@ -195,13 +238,13 @@ public class EmployeeExplorer extends TransparentPanel {
 					String st = brd.readLine();
 					OneRow = st.split(",");
 					Rs.add(OneRow);
-					System.out.println(Arrays.toString(OneRow));
+					//System.out.println(Arrays.toString(OneRow));
 				} // end of while
 			} // end of try
 			catch (Exception e) {
 				e.printStackTrace();
 				String errmsg = e.getMessage();
-				System.out.println("File not found:" + errmsg);
+			//	System.out.println("File not found:" + errmsg);
 			} // end of Catch
 			return Rs;
 		}// end of ReadFile method
